@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "770763663549",
+    "project_id": "btl-adr-nangcao",
+    "storage_bucket": "btl-adr-nangcao.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770763663549:android:c03078f087489b7faeefd4",
+        "android_client_info": {
+          "package_name": "com.example.btl_adr_nangcao"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdt6dzNg3XFctkI-ubb0em21neQzcFP8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
