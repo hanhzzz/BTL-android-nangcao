@@ -1,4 +1,4 @@
-package com.example.btl_adr_nangcao;
+package com.example.btl_adr_nangcao.Activity;
 
 import android.os.Bundle;
 

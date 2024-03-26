@@ -1,4 +1,4 @@
-package com.example.btl_adr_nangcao;
+package com.example.btl_adr_nangcao.Activity;
 
 import androidx.annotation.NonNull;
 
@@ -11,44 +11,43 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.btl_adr_nangcao.R;
+import com.example.btl_adr_nangcao.databinding.ActivityRegisterBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 
 public class RegisterActivity extends BaseFirebaseClass {
+    private ActivityRegisterBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         //btn_register
         BtnRegisterAction();
-        RegisterNow();
+        LoginNow();
     }
 
     private void BtnRegisterAction(){
-        //anh xa
-        EditText emailRegister = findViewById(R.id.emailLogin);
-        EditText passwordRegister = findViewById(R.id.passwordRegister);
-        EditText rePasswordRegister = findViewById(R.id.rePasswordRegister);
-        Button btnRegister = findViewById(R.id.btnRegister);
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = emailRegister.getText().toString();
-                String password = passwordRegister.getText().toString();
-                String repassword = rePasswordRegister.getText().toString();
+                String email = binding.emailRegister.getText().toString();
+                String password = binding.passwordRegister.getText().toString();
+                String repassword = binding.rePasswordRegister.getText().toString();
 
                 if(password.equals(repassword) == false){
                     Toast.makeText(RegisterActivity.this, "Nhập lại mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
-                    rePasswordRegister.setText("");
+                    binding.rePasswordRegister.setText("");
                     return;
                 }
                 if(password.length() < 8){
                     Toast.makeText(RegisterActivity.this, "Mật khẩu phải nhiều hơn 8 ký tự", Toast.LENGTH_SHORT).show();
-                    passwordRegister.setText("");
-                    rePasswordRegister.setText("");
+                    binding.passwordRegister.setText("");
+                    binding.rePasswordRegister.setText("");
                     return;
                 }
                 //tao tk
@@ -70,10 +69,8 @@ public class RegisterActivity extends BaseFirebaseClass {
     }
 
     //action da co tai khoan? dang nhap
-    private void RegisterNow(){
-        TextView registerNow = findViewById(R.id.loginNow);
-
-        registerNow.setOnClickListener(new View.OnClickListener() {
+    private void LoginNow(){
+        binding.loginNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));

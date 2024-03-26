@@ -1,6 +1,4 @@
-package com.example.btl_adr_nangcao;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.btl_adr_nangcao.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,24 +8,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class LoginActivity extends BaseFirebaseClass {
+import com.example.btl_adr_nangcao.R;
+import com.example.btl_adr_nangcao.databinding.ActivityLoginBinding;
 
+public class LoginActivity extends BaseFirebaseClass {
+    private ActivityLoginBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         BtnLoginAction();
-        LoginNow();
+        RegisterNow();
     }
 
     private void BtnLoginAction(){
-        //anh xa
-        EditText emailLogin = findViewById(R.id.emailLogin);
-        EditText passwordLogin = findViewById(R.id.passwordLogin);
-        Button btnLogin = findViewById(R.id.btnLogin);
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -35,9 +32,8 @@ public class LoginActivity extends BaseFirebaseClass {
         });
     }
 
-    private void LoginNow(){
-        TextView registerNow = findViewById(R.id.registerNow);
-        registerNow.setOnClickListener(new View.OnClickListener() {
+    private void RegisterNow(){
+        binding.registerNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i(TAG,"loi an dang ky ngay");

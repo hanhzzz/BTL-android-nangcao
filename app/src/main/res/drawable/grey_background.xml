@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item>
+    <shape android:shape="rectangle"> //xac dinh hinh chu nhat
+        <solid android:color="@color/grey"></solid> //xac dinh mau nen cua hinh
+        <corners android:radius="10dp"></corners> // xac dinh do cong cua hinh
+    </shape>
+</item>
+</selector>

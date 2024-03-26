@@ -6,4 +6,15 @@
     </style>
 
     <style name="Theme.BTL_adr_nangcao" parent="Base.Theme.BTL_adr_nangcao" />
+
+    <style name="textStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/bue_grey</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="textStyleBold" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/bue_grey</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
