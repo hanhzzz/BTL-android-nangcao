@@ -1,5 +1,6 @@
 package com.example.btl_adr_nangcao.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,16 +10,24 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.btl_adr_nangcao.Adapter.CartAdapter;
+import com.example.btl_adr_nangcao.Domain.Cart;
 import com.example.btl_adr_nangcao.Helper.ChangeNumberItemsListener;
 import com.example.btl_adr_nangcao.Helper.ManagmentCart;
 import com.example.btl_adr_nangcao.R;
 import com.example.btl_adr_nangcao.databinding.ActivityCartBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class CartActivity extends BaseFirebaseClass {
     private ActivityCartBinding binding;
-    private RecyclerView.Adapter adapter;
     private ManagmentCart managmentCart;
-    private  double tax;
+    ArrayList<Cart> listCart = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +36,13 @@ public class CartActivity extends BaseFirebaseClass {
         setContentView(binding.getRoot());
 
         managmentCart = new ManagmentCart(this);
+
+        //tao firestore
+        firestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         
         setVariable();
-        caculatorCart();
+        //caculatorCart();
         initList();
     }
 
@@ -45,29 +58,38 @@ public class CartActivity extends BaseFirebaseClass {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.cardView.setLayoutManager(linearLayoutManager);
-        adapter = new CartAdapter(managmentCart.getListCart(), this, new ChangeNumberItemsListener() {
-            @Override
-            public void change() {
-                caculatorCart();
-            }
-        });
-        binding.cardView.setAdapter(adapter);
+
+        firestore.collection("AddToCart").document(mAuth.getCurrentUser().getUid())
+                        .collection("CurrentUser").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            double total = 0;
+                            for(DocumentSnapshot documentSnapshot : task.getResult().getDocuments()){
+                                //lay du lieu id tu document
+                                String documentId = documentSnapshot.getId();
+                                //tao 1 bien de hung du lieu tu document
+                                Cart cart = documentSnapshot.toObject(Cart.class);
+                                //set id cho moi product trong cart
+                                cart.setCartId(documentId);
+
+                                listCart.add(cart);
+                                RecyclerView.Adapter adapter = new CartAdapter(listCart);
+                                binding.cardView.setAdapter(adapter);
+
+                                //tinh tong tien
+                                double price = documentSnapshot.getDouble("cartPrice");
+                                int quantity = documentSnapshot.getLong("cartNumberInCart").intValue();
+                                total = total + price*quantity;
+                            }
+                            //set tong tien
+                            binding.txtTotal.setText(total+"d");
+
+                        }
+                    }
+                });
     }
 
-    private void caculatorCart() {
-        double percentTax = 0.02;
-        double delivery = 10000;
-
-        tax = Math.round(managmentCart.getTotalFee() * percentTax * 100) / 100;
-
-        double total = Math.round((managmentCart.getTotalFee() + tax + delivery) * 100) / 100;
-        double itemTotal = Math.round(managmentCart.getTotalFee() * 100) / 100;
-
-        binding.txtTotalFee.setText(itemTotal+"d");
-        binding.txtTax.setText(tax+"d");
-        binding.txtDelivery.setText(delivery+"d");
-        binding.txtTotal.setText(total+"d");
-    }
 
     private void setVariable() {
         binding.btnBack.setOnClickListener(new View.OnClickListener() {

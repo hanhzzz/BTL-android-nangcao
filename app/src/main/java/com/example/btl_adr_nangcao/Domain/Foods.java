@@ -6,14 +6,10 @@ public class Foods implements Serializable {
     private int CategoryId;
     private String Description;
     private boolean BestFood;
-    private int Id;
-    private int LocationId;
+    private String Id;
     private double Price;
     private String ImagePath;
-    private int PriceId;
     private double Star;
-    private int TimeId;
-    private int TimeValue;
     private String Title;
     private int NumberInCart;
 
@@ -49,20 +45,12 @@ public class Foods implements Serializable {
         BestFood = bestFood;
     }
 
-    public int getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         Id = id;
-    }
-
-    public int getLocationId() {
-        return LocationId;
-    }
-
-    public void setLocationId(int locationId) {
-        LocationId = locationId;
     }
 
     public double getPrice() {
@@ -81,36 +69,12 @@ public class Foods implements Serializable {
         ImagePath = imagePath;
     }
 
-    public int getPriceId() {
-        return PriceId;
-    }
-
-    public void setPriceId(int priceId) {
-        PriceId = priceId;
-    }
-
     public double getStar() {
         return Star;
     }
 
     public void setStar(double star) {
         Star = star;
-    }
-
-    public int getTimeId() {
-        return TimeId;
-    }
-
-    public void setTimeId(int timeId) {
-        TimeId = timeId;
-    }
-
-    public int getTimeValue() {
-        return TimeValue;
-    }
-
-    public void setTimeValue(int timeValue) {
-        TimeValue = timeValue;
     }
 
     public String getTitle() {

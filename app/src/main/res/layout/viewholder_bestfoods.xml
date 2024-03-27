@@ -75,27 +75,6 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:id="@+id/timeTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time"
-                app:layout_constraintBottom_toBottomOf="@+id/starTxt"
-                app:layout_constraintEnd_toStartOf="@+id/ic_plus_addToCart"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
-                app:layout_constraintTop_toTopOf="@+id/starTxt" />
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/icon_time"
-                app:tint="@color/red"
-                app:layout_constraintBottom_toBottomOf="@+id/timeTxt"
-                app:layout_constraintStart_toEndOf="@+id/timeTxt"
-                app:layout_constraintTop_toTopOf="@+id/timeTxt" />
-
-            <TextView
                 android:id="@+id/priceTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

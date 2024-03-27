@@ -4,14 +4,12 @@ import androidx.annotation.NonNull;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.btl_adr_nangcao.R;
+import com.example.btl_adr_nangcao.Domain.UserModel;
 import com.example.btl_adr_nangcao.databinding.ActivityRegisterBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,6 +34,7 @@ public class RegisterActivity extends BaseFirebaseClass {
             @Override
             public void onClick(View view) {
                 String email = binding.emailRegister.getText().toString();
+                String name = binding.name.getText().toString();
                 String password = binding.passwordRegister.getText().toString();
                 String repassword = binding.rePasswordRegister.getText().toString();
 
@@ -56,6 +55,11 @@ public class RegisterActivity extends BaseFirebaseClass {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isComplete()){
                             Log.i(TAG, "loi tai complete create user");
+
+                            UserModel userModel = new UserModel(name, email, password);
+                            String id = task.getResult().getUser().getUid();
+                            database.getReference("Users").child(id).setValue(userModel);
+                            Toast.makeText(RegisterActivity.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         }
                         else{
@@ -64,8 +68,22 @@ public class RegisterActivity extends BaseFirebaseClass {
                         }
                     }
                 });
+
+                createUser();
             }
         });
+    }
+
+    private void createUser() {
+        String email = binding.emailRegister.getText().toString();
+        String name = binding.name.getText().toString();
+        String password = binding.passwordRegister.getText().toString();
+        String repassword = binding.rePasswordRegister.getText().toString();
+
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(this, "Chua nhap email", Toast.LENGTH_SHORT).show();
+            return;
+        }
     }
 
     //action da co tai khoan? dang nhap

@@ -40,7 +40,6 @@ public class BestFoodAdapter extends RecyclerView.Adapter<BestFoodAdapter.viewho
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
         holder.titleTxt.setText(items.get(position).getTitle());
         holder.priceTxt.setText(items.get(position).getPrice()+"đ");
-        holder.timeTxt.setText(items.get(position).getTimeValue()+"phút");
         holder.starTxt.setText(items.get(position).getStar()+"");
 
         //context = holder.itemView.getContext();
@@ -76,7 +75,6 @@ public class BestFoodAdapter extends RecyclerView.Adapter<BestFoodAdapter.viewho
             titleTxt = itemView.findViewById(R.id.titleTxt);
             priceTxt = itemView.findViewById(R.id.priceTxt);
             starTxt = itemView.findViewById(R.id.starTxt);
-            timeTxt = itemView.findViewById(R.id.timeTxt);
             picture = itemView.findViewById(R.id.picture);
         }
     }

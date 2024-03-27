@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class BaseFirebaseClass extends AppCompatActivity {
+    FirebaseFirestore firestore;
     FirebaseAuth mAuth;
     FirebaseDatabase database;
     public String TAG = "hanhzzz";
