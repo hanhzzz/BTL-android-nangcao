@@ -13,11 +13,18 @@ import com.example.btl_adr_nangcao.Adapter.FoodListAdapter;
 import com.example.btl_adr_nangcao.Domain.Foods;
 import com.example.btl_adr_nangcao.R;
 import com.example.btl_adr_nangcao.databinding.ActivityListFood2Binding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -43,39 +50,74 @@ public class ListFoodActivity extends BaseFirebaseClass {
     }
 
     private void initList() {
-        DatabaseReference myRef = database.getReference("Foods");
-        binding.progressBar.setVisibility(View.VISIBLE);
+//        DatabaseReference myRef = database.getReference("Foods");
+//        binding.progressBar.setVisibility(View.VISIBLE);
+//        ArrayList<Foods> list = new ArrayList<>();
+//
+////        Query query;
+//        if(isSearch){
+//            query = myRef.orderByChild("Title").startAt(searchText).endAt(searchText+'\uf8ff');
+//        }
+//        else{
+//            query = myRef.orderByChild("CategoryId").equalTo(categoryId);
+//        }
+//        query.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.exists()){
+//                    for(DataSnapshot issue : snapshot.getChildren()){
+//                        list.add(issue.getValue(Foods.class));
+//                    }
+//                    if(list.size()>0){
+//                        binding.FoodListView.setLayoutManager(new GridLayoutManager(ListFoodActivity.this, 2));
+//                        adapterListFood = new FoodListAdapter(list);
+//                        binding.FoodListView.setAdapter(adapterListFood);
+//                        Log.d(TAG, "da tao list");
+//                    }
+//                    binding.progressBar.setVisibility(View.GONE);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
         ArrayList<Foods> list = new ArrayList<>();
 
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         Query query;
+
+        CollectionReference itemsRef = firestore.collection("Foods");
         if(isSearch){
-            query = myRef.orderByChild("Title").startAt(searchText).endAt(searchText+'\uf8ff');
+            query = itemsRef.whereEqualTo("Title", searchText);
         }
         else{
-            query = myRef.orderByChild("CategoryId").equalTo(categoryId);
+            query = itemsRef.whereEqualTo("CategoryId", categoryId);
         }
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot issue : snapshot.getChildren()){
-                        list.add(issue.getValue(Foods.class));
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        Foods foods = document.toObject(Foods.class);
+                        list.add(foods);
+
                     }
                     if(list.size()>0){
-                        binding.FoodListView.setLayoutManager(new GridLayoutManager(ListFoodActivity.this, 2));
-                        adapterListFood = new FoodListAdapter(list);
-                        binding.FoodListView.setAdapter(adapterListFood);
                         Log.d(TAG, "da tao list");
+                        binding.FoodListView.setLayoutManager(new GridLayoutManager(ListFoodActivity.this, 2));
+                        RecyclerView.Adapter adapterListFood = new FoodListAdapter(list);
+                        binding.FoodListView.setAdapter(adapterListFood);
                     }
                     binding.progressBar.setVisibility(View.GONE);
                 }
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
+
     }
 
     private void getIntentExtra() {

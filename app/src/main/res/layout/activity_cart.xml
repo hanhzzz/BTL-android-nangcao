@@ -10,7 +10,6 @@
         android:id="@+id/txtEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="gio hang trong"
         android:textColor="@color/bue_grey"
         app:layout_constraintBottom_toBottomOf="@+id/scrollViewCart"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +60,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/grey_background"
                     android:ems="10"
-                    android:hint="Nhap ma giam gia"
+                    android:hint="Dia diem nhan"
                     android:inputType="text"
                     android:text=""
                     android:textAlignment="center"
@@ -69,14 +68,6 @@
                     android:textColorHint="@color/bue_grey"
                     android:textSize="14sp" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button"
-                    style="@android:style/Widget.Button"
-                    android:layout_width="145dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/red_btn_background"
-                    android:text="Nhap ma"
-                    android:textColor="@color/white" />
             </LinearLayout>
 
             <TextView
@@ -96,87 +87,15 @@
                 android:background="@drawable/grey_background">
 
                 <TextView
-                    android:id="@+id/textView11"
-                    style="@style/textStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Sub total"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView12"
-                    style="@style/textStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Delivery"
-                    app:layout_constraintStart_toStartOf="@+id/textView11"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-                <TextView
-                    android:id="@+id/textView15"
-                    style="@style/textStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Total tax"
-                    app:layout_constraintStart_toStartOf="@+id/textView12"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-                <TextView
-                    android:id="@+id/txtTotalFee"
-                    style="@style/textStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:text="d"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView11" />
-
-                <TextView
-                    android:id="@+id/txtDelivery"
-                    style="@style/textStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="d"
-                    app:layout_constraintEnd_toEndOf="@+id/txtTotalFee"
-                    app:layout_constraintTop_toBottomOf="@+id/txtTotalFee" />
-
-                <TextView
-                    android:id="@+id/txtTax"
-                    style="@style/textStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="d"
-                    app:layout_constraintEnd_toEndOf="@+id/txtDelivery"
-                    app:layout_constraintTop_toBottomOf="@+id/txtDelivery" />
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="#ABABAB"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-                <TextView
                     android:id="@+id/textView24"
                     style="@style/textStyleBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
                     android:text="Tong hoa don"
-                    app:layout_constraintStart_toStartOf="@+id/textView15"
-                    app:layout_constraintTop_toBottomOf="@+id/view" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/txtTotal"
@@ -200,6 +119,7 @@
                 android:background="@drawable/btn_login"
                 android:text="Dia diem giao hang"
                 android:textColor="@color/white" />
+
         </LinearLayout>
     </ScrollView>
 

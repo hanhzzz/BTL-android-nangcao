@@ -99,7 +99,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
         if(items != null){
             return items.size();
         }
-        return 0;
+        return items.size();
     }
 
     public class viewholder extends RecyclerView.ViewHolder {
