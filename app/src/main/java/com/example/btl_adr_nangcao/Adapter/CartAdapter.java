@@ -54,6 +54,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.viewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.viewholder holder, int position) {
+        //set giao dien
         holder.title.setText(listCart.get(position).getCartTitle());
         holder.feeEachItem.setText((listCart.get(position).getCartNumberInCart()*listCart.get(position).getCartPrice())+"d");
         holder.totalEachItem.setText(listCart.get(position).getCartNumberInCart()+" *d "+(listCart.get(position).getCartPrice()));
@@ -81,64 +82,49 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.viewholder> {
             }
         });
 
-//        //set chuc nang nut +
-//        holder.plusItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                listCart.get(position).setCartNumberInCart(listCart.get(position).getCartNumberInCart()+1);
-//                String productId = listCart.get(position).getCartId();
-//                int newQuantity = listCart.get(position).getCartNumberInCart();
-//                updateQuantityFirestore(productId, newQuantity);
-//                notifyDataSetChanged();
-//            }
-//        });
-//
-//        //set chuc nang nut -
-//        holder.minusItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(listCart.get(position).getCartNumberInCart() == 1){
-//                    listCart.remove(position);
-//                }
-//                else{
-//                    listCart.get(position).setCartNumberInCart(listCart.get(position).getCartNumberInCart()-1);
-//                    String productId = listCart.get(position).getCartId();
-//                    int newQuantity = listCart.get(position).getCartNumberInCart();
-//                    updateQuantityFirestore(productId, newQuantity);
-//                }
-//                notifyDataSetChanged();
-//            }
-//        });
+        //set chuc nang nut +
+        holder.plusItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listCart.get(position).setCartNumberInCart(listCart.get(position).getCartNumberInCart()+1);
+                String productId = listCart.get(position).getCartId();
+                int newQuantity = listCart.get(position).getCartNumberInCart();
+                updateQuantityFirestore(productId, newQuantity);
+                notifyDataSetChanged();
+            }
+        });
+
+        //set chuc nang nut -
+        holder.minusItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(listCart.get(position).getCartNumberInCart() == 1){
+                    listCart.remove(position);
+                }
+                else{
+                    listCart.get(position).setCartNumberInCart(listCart.get(position).getCartNumberInCart()-1);
+                    String productId = listCart.get(position).getCartId();
+                    int newQuantity = listCart.get(position).getCartNumberInCart();
+                    updateQuantityFirestore(productId, newQuantity);
+                }
+                notifyDataSetChanged();
+            }
+        });
 
 
     }
 
     //update so luong vao firestore
     private void updateQuantityFirestore(String productId, int newQuantity) {
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-        CollectionReference itemsRef = firestore.collection("AddToCart").document(mAuth.getCurrentUser().getUid()).collection("CurrentUser");
-        Query query = itemsRef.whereEqualTo("cartId", productId);
-
-        //put du lieu
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot document : task.getResult()){
-                        int currentQuantity = document.getLong("cartNumberInCart").intValue();
-                        //add vao
-                        document.getReference().update("cartNumberInCart", newQuantity).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Log.d("Hanhzzz", "Cập nhật số lượng mặt hàng thành công");
-                            }
-                        });
+        firestore.collection("AddToCart").document(mAuth.getCurrentUser().getUid())
+                .collection("CurrentUser")
+                .document(productId)
+                .update("cartNumberInCart", newQuantity).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d("Hanhzzz", "Document successfully updated!");
                     }
-                }
-            }
-        });
+                });
     }
 
     @Override
@@ -156,8 +142,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.viewholder> {
 
             title = itemView.findViewById(R.id.txtTitle);
             feeEachItem = itemView.findViewById(R.id.feeEachItem);
-//            plusItem = itemView.findViewById(R.id.btnPlusCart);
-//            minusItem = itemView.findViewById(R.id.btnMinusCart);
+            plusItem = itemView.findViewById(R.id.btnPlusCart);
+            minusItem = itemView.findViewById(R.id.btnMinusCart);
             pic = itemView.findViewById(R.id.pic);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             totalEachItem = itemView.findViewById(R.id.totalEachItem);

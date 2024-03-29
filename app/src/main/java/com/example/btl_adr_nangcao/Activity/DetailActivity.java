@@ -41,8 +41,6 @@ public class DetailActivity extends BaseFirebaseClass {
     }
 
     private void setVariable() {
-        managmentCart = new ManagmentCart(this);
-
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,12 +52,12 @@ public class DetailActivity extends BaseFirebaseClass {
                 .load(object.getImagePath())
                 .into(binding.pic);
 
-        binding.txtPrice.setText(object.getPrice()+"d");
+        binding.txtPrice.setText(object.getPrice()+" đ");
         binding.txtTitle.setText(object.getTitle());
         binding.txtDecription.setText(object.getDescription());
-        binding.txtRate.setText(object.getStar() + " rating");
+        binding.txtRate.setText(object.getStar() + " đánh giá");
         binding.ratingBar.setRating((float) object.getStar());
-        binding.txtTotal.setText(num*object.getPrice()+"d");
+        binding.txtTotal.setText(num*object.getPrice()+" đ");
 
         //them san pham
         binding.btnPlus.setOnClickListener(new View.OnClickListener() {
