@@ -24,7 +24,6 @@ public class DetailActivity extends BaseFirebaseClass {
     ActivityDetailBinding binding;
     private Foods object;
     private int num = 1;
-    private ManagmentCart managmentCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +85,6 @@ public class DetailActivity extends BaseFirebaseClass {
             @Override
             public void onClick(View view) {
                 object.setNumberInCart(num);
-                //managmentCart.insertFood(object);
 
                 //tao hashmap
                 final HashMap<String,Object> cartMap = new HashMap<>();

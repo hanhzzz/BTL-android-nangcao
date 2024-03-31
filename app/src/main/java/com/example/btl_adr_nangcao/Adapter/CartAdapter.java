@@ -37,7 +37,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.viewholder> {
     FirebaseFirestore firestore;
     FirebaseAuth mAuth;
     ArrayList<Cart> listCart;
-    private ManagmentCart managmentCart;
 
     public CartAdapter(ArrayList<Cart> listCart) {
         this.listCart = listCart;
@@ -57,7 +56,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.viewholder> {
         //set giao dien
         holder.title.setText(listCart.get(position).getCartTitle());
         holder.feeEachItem.setText((listCart.get(position).getCartNumberInCart()*listCart.get(position).getCartPrice())+"d");
-        holder.totalEachItem.setText(listCart.get(position).getCartNumberInCart()+" *d "+(listCart.get(position).getCartPrice()));
+        holder.totalEachItem.setText((listCart.get(position).getCartPrice())+"");
         holder.num.setText(listCart.get(position).getCartNumberInCart()+"");
 
         Glide.with(holder.itemView.getContext())

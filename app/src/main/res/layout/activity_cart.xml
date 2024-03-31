@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
-                android:text="Cart"
+                android:text="Giỏ hàng"
                 android:textAlignment="center"
                 android:textColor="@color/bue_grey"
                 android:textSize="24sp"
@@ -46,36 +46,12 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/editTextText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/grey_background"
-                    android:ems="10"
-                    android:hint="Dia diem nhan"
-                    android:inputType="text"
-                    android:text=""
-                    android:textAlignment="center"
-                    android:textColor="@color/bue_grey"
-                    android:textColorHint="@color/bue_grey"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Tong tien hoa don"
+                android:text="Tổng tiền hóa đơn"
                 android:textColor="@color/bue_grey"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -92,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Tong hoa don"
+                    android:text="Tổng hóa đơn"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -110,14 +86,48 @@
                     app:layout_constraintTop_toTopOf="@+id/textView24" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/bue_grey"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Nhập nơi nhận hàng" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/txtDiadiemnhan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_background"
+                    android:ems="10"
+                    android:hint="Địa chỉ nhận"
+                    android:inputType="text"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/bue_grey"
+                    android:textColorHint="@color/bue_grey"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button3"
+                android:id="@+id/btnGiaohang"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/btn_login"
-                android:text="Dia diem giao hang"
+                android:text="Giao hàng"
                 android:textColor="@color/white" />
 
         </LinearLayout>

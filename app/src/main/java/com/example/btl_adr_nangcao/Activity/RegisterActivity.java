@@ -14,6 +14,8 @@ import com.example.btl_adr_nangcao.databinding.ActivityRegisterBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class RegisterActivity extends BaseFirebaseClass {
@@ -23,6 +25,10 @@ public class RegisterActivity extends BaseFirebaseClass {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //tao firestore
+        firestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         //btn_register
         BtnRegisterAction();

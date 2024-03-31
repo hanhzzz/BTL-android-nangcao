@@ -1,6 +1,7 @@
 package com.example.btl_adr_nangcao.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,11 @@ import com.example.btl_adr_nangcao.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -33,12 +39,29 @@ public class MainActivity extends BaseFirebaseClass {
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        database = FirebaseDatabase.getInstance();
+
         InitBestFood();
         InitCategory();
         setVariable();
     }
 
     private void setVariable() {
+        //set ten nguoi dung
+        DatabaseReference dataRef = database.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("name");
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String nameCurrentUser = snapshot.getValue(String.class);
+                binding.nameCurrentUser.setText(nameCurrentUser+"");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         binding.btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +86,14 @@ public class MainActivity extends BaseFirebaseClass {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, CartActivity.class));
+            }
+        });
+
+        binding.btnBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, BillActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -108,7 +139,7 @@ public class MainActivity extends BaseFirebaseClass {
                     }
                     if(listCategory.size()>0){
                         Log.d(TAG, "da tao list best food");
-                        binding.recyclerCategory.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                        binding.recyclerCategory.setLayoutManager(new GridLayoutManager(MainActivity.this, 4));
                         RecyclerView.Adapter adapter = new CategoryAdapter(listCategory);
                         binding.recyclerCategory.setAdapter(adapter);
                     }
