@@ -1,7 +1,6 @@
 package com.example.btl_adr_nangcao.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,13 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.btl_adr_nangcao.Adapter.BillAdapter;
-import com.example.btl_adr_nangcao.Adapter.RecycleinBillAdapter;
 import com.example.btl_adr_nangcao.Domain.Bill;
-import com.example.btl_adr_nangcao.Domain.Cart;
-import com.example.btl_adr_nangcao.Domain.IteminRecycleBill;
-import com.example.btl_adr_nangcao.R;
 import com.example.btl_adr_nangcao.databinding.ActivityBillBinding;
-import com.example.btl_adr_nangcao.databinding.ActivityViewHolderBillBinding;
+//import com.example.btl_adr_nangcao.databinding.ActivityViewHolderBillBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

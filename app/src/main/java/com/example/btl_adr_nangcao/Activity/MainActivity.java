@@ -96,6 +96,14 @@ public class MainActivity extends BaseFirebaseClass {
                 startActivity(intent);
             }
         });
+
+        binding.iconTrangchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Thi_BTL.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void InitBestFood() {

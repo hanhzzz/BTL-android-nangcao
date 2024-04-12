@@ -50,39 +50,6 @@ public class ListFoodActivity extends BaseFirebaseClass {
     }
 
     private void initList() {
-//        DatabaseReference myRef = database.getReference("Foods");
-//        binding.progressBar.setVisibility(View.VISIBLE);
-//        ArrayList<Foods> list = new ArrayList<>();
-//
-////        Query query;
-//        if(isSearch){
-//            query = myRef.orderByChild("Title").startAt(searchText).endAt(searchText+'\uf8ff');
-//        }
-//        else{
-//            query = myRef.orderByChild("CategoryId").equalTo(categoryId);
-//        }
-//        query.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if(snapshot.exists()){
-//                    for(DataSnapshot issue : snapshot.getChildren()){
-//                        list.add(issue.getValue(Foods.class));
-//                    }
-//                    if(list.size()>0){
-//                        binding.FoodListView.setLayoutManager(new GridLayoutManager(ListFoodActivity.this, 2));
-//                        adapterListFood = new FoodListAdapter(list);
-//                        binding.FoodListView.setAdapter(adapterListFood);
-//                        Log.d(TAG, "da tao list");
-//                    }
-//                    binding.progressBar.setVisibility(View.GONE);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
         ArrayList<Foods> list = new ArrayList<>();
 

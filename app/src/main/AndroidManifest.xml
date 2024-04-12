@@ -13,7 +13,13 @@
         android:theme="@style/Theme.BTL_adr_nangcao"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.ViewHolder_Bill"
+            android:name=".Activity.NhapSinhvien"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Thi_BTL"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.LightSensor"
             android:exported="false" />
         <activity
             android:name=".Activity.BillActivity"
